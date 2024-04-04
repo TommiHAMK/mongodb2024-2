@@ -72,6 +72,7 @@ app.get('/', (req,res) => {
     res.render('index');
 })
 
+/* API
 app.get('/products', async (req,res) => {
     try {
         const result = await Product.find();
@@ -81,6 +82,28 @@ app.get('/products', async (req,res) => {
         console.log(error);
     }
 })
+*/
+
+// Create Products webpage and list all the resources
+app.get('/products', async (req,res) => {
+    try {
+        const products = await Product.find();
+        //res.json(result);
+        res.render('products', {
+            title: 'Our Products',
+            products: products.map(doc => doc.toJSON())
+        })
+    }
+    catch (error) {
+        res.status(404).render('products',{
+            title: 'We got a error here'
+        })
+        console.log(error);
+    }
+})
+
+
+
 
 
 app.get('/products/:id', async (req,res) => {
