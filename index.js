@@ -5,6 +5,8 @@ require('dotenv').config();
 
 const app = express();
 
+app.use(express.urlencoded({extended: false}));
+
 // default settings for Handlebars
 app.engine('handlebars', exphbs.engine({
     defaultLayout: 'main'
@@ -115,5 +117,12 @@ app.get('/products/:id', async (req,res) => {
 // Route for form page
 app.get('/add-product', (req,res) => {
     res.render('add-product');
+});
+
+// Route for creating the resource
+app.post('/products', async (req,res) => {
+    const newProduct = new Product(req.body);
+    await newProduct.save();
+    res.send("<h1>Product added</h1>");
 });
 
