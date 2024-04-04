@@ -96,14 +96,11 @@ app.get('/products', async (req,res) => {
     }
     catch (error) {
         res.status(404).render('products',{
-            title: 'We got a error here'
+            title: 'We got an error here'
         })
         console.log(error);
     }
 })
-
-
-
 
 
 app.get('/products/:id', async (req,res) => {
@@ -113,5 +110,10 @@ app.get('/products/:id', async (req,res) => {
 });
 
 
+// Create a document, add to MondoDB, submit data from web form
 
+// Route for form page
+app.get('/add-product', (req,res) => {
+    res.render('add-product');
+});
 
