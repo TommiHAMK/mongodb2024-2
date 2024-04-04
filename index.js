@@ -5,6 +5,7 @@ require('dotenv').config();
 
 const app = express();
 
+// With this middleware we can get the data from HTML form
 app.use(express.urlencoded({extended: false}));
 
 // default settings for Handlebars
